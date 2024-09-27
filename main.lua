@@ -4,15 +4,21 @@ function love.load()
     
     math.randomseed( os.time() )
 
-    love.graphics.setBackgroundColor(1, 1, 1)
-    spaceshipImage = love.graphics.newImage("huTao.png")
+    love.graphics.setBackgroundColor(0, 0, 0)
+    spaceshipImage = love.graphics.newImage("player1.png")
     
+
+
     posX = 0
     posY = 0
-    angle =  5
-  
-    speed = 100.0
-  
+    angle = 0
+
+    speed = 300.0
+
+    ballX = 300
+    ballY = 300
+    radius = 50
+    segment = 100
   end
   
   
@@ -34,6 +40,23 @@ function love.load()
       posY = posY + speed * dt
     end
     
+
+    if love.keyboard.isDown("right") then
+      ballX = ballX + speed * dt
+    end
+    
+    if love.keyboard.isDown("left") then
+      ballX = ballX - speed * dt
+    end
+    
+    if love.keyboard.isDown("up") then
+      ballY = ballY - speed * dt
+    end
+    
+    if love.keyboard.isDown("down") then
+      ballY = ballY + speed * dt
+    end
+
   end
   
   
@@ -41,5 +64,7 @@ function love.load()
     
     love.graphics.setColor(1, 1, 1)
     love.graphics.draw(spaceshipImage, posX, posY, angle)
+    love.graphics.setColor(1, 1, 1)
+    love.graphics.circle("fill", ballX, ballY, radius, segment)
   
   end
