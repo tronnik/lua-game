@@ -1,70 +1,56 @@
+
+local grid = {} 
+
 function love.load()
-  
-    love.window.setTitle("game")
-    
-    math.randomseed( os.time() )
+    windowWidth = 600
+    windowHeight = 600 
+    love.window.setMode(windowWidth, windowHeight) 
+    cellSize = windowWidth / 3 
 
-    love.graphics.setBackgroundColor(0, 0, 0)
-    spaceshipImage = love.graphics.newImage("player1.png")
-    
-
-
-    posX = 0
-    posY = 0
-    angle = 0
-
-    speed = 300.0
-
-    ballX = 300
-    ballY = 300
-    radius = 50
-    segment = 100
-  end
-  
-  
-  function love.update(dt)
-    
-    if love.keyboard.isDown("d") then
-      posX = posX + speed * dt
-    end
-    
-    if love.keyboard.isDown("a") then
-      posX = posX - speed * dt
-    end
-    
-    if love.keyboard.isDown("w") then
-      posY = posY - speed * dt
-    end
-    
-    if love.keyboard.isDown("s") then
-      posY = posY + speed * dt
-    end
-    
-
-    if love.keyboard.isDown("right") then
-      ballX = ballX + speed * dt
-    end
-    
-    if love.keyboard.isDown("left") then
-      ballX = ballX - speed * dt
-    end
-    
-    if love.keyboard.isDown("up") then
-      ballY = ballY - speed * dt
-    end
-    
-    if love.keyboard.isDown("down") then
-      ballY = ballY + speed * dt
+ 
+    for i = 1, 3 
+    do
+        grid[i] = {"", "", ""} 
     end
 
-  end
-  
-  
-  function love.draw()
-    
-    love.graphics.setColor(1, 1, 1)
-    love.graphics.draw(spaceshipImage, posX, posY, angle)
-    love.graphics.setColor(1, 1, 1)
-    love.graphics.circle("fill", ballX, ballY, radius, segment)
-  
-  end
+end
+
+
+function love.mousepressed(x, y, button)
+    if button == 1 
+    then 
+        
+        local row = math.ceil(y / cellSize)
+        local col = math.ceil(x / cellSize)
+
+        
+        if grid[row][col] == "" 
+        then
+            grid[row][col] = "X"  
+        end
+    end
+end
+
+
+function love.draw()
+    love.graphics.line(cellSize, 0, cellSize, windowHeight)  
+    love.graphics.line(2 * cellSize, 0, 2 * cellSize, windowHeight)
+
+    love.graphics.line(0, cellSize, windowWidth, cellSize)
+    love.graphics.line(0, 2 * cellSize, windowWidth, 2 * cellSize)
+
+    for row = 1, 3
+     do
+        for col = 1, 3
+         do
+            local mark = grid[row][col]
+            if mark == "X" 
+            then
+                love.graphics.print("X", (col - 1) * cellSize + cellSize / 2 - 10, (row - 1) * cellSize + cellSize / 2 - 10)
+            elseif mark == "O" 
+            then
+                love.graphics.print("O", (col - 1) * cellSize + cellSize / 2 - 10, (row - 1) * cellSize + cellSize / 2 - 10)
+            end
+        end
+    end
+end
