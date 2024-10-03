@@ -11,7 +11,7 @@ function love.load()
     cellSize = windowWidth / 3
 
     imageX = love.graphics.newImage("miku.png")
-    imageY = love.graphics.newImage("nino2.png")
+    imageY = love.graphics.newImage("nino2.png") 
 
     for i = 1, 3 
     do
@@ -20,7 +20,8 @@ function love.load()
 end
 
 function resetGame()
-    for i = 1, 3 do
+    for i = 1, 3
+     do
         grid[i] = {"", "", ""}
     end
     currentPlayer = "miku"
@@ -43,8 +44,9 @@ function love.mousepressed(x, y, button)
 end
 
 function love.keypressed(key)
-    if key == "r" then
-        resetGame()  -- Reinicia el juego si se presiona 'R'
+    if key == "r" 
+    then
+        resetGame()  
     end
 end
 
