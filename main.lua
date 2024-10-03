@@ -1,12 +1,17 @@
 local grid = {}
-local currentPlayer = "X"
+local currentPlayer = "miku"
 local winner = nil
+local imageX
+local imageY
 
 function love.load()
     windowWidth = 600
     windowHeight = 600
     love.window.setMode(windowWidth, windowHeight)
     cellSize = windowWidth / 3
+
+    imageX = love.graphics.newImage("miku.png")
+    imageY = love.graphics.newImage("nino2.png")
 
     for i = 1, 3 
     do
@@ -23,7 +28,7 @@ function love.mousepressed(x, y, button)
         if grid[row][col] == "" and winner == nil 
         then
             grid[row][col] = currentPlayer
-            currentPlayer = (currentPlayer == "X") and "O" or "X"
+            currentPlayer = (currentPlayer == "miku") and "nino" or "miku"
             checkWinner()
         end
     end
@@ -72,19 +77,19 @@ function love.draw()
         for col = 1, 3 
         do
             local mark = grid[row][col]
-            if mark == "X" 
+            if mark == "miku" 
             then
-                love.graphics.print("X", (col - 1) * cellSize + cellSize / 2 - 10, (row - 1) * cellSize + cellSize / 2 - 10)
-            elseif mark == "O" 
+                love.graphics.draw(imageX, (col - 1) * cellSize + 10, (row - 1) * cellSize, 0, cellSize / imageX:getWidth(), cellSize / imageX:getHeight())
+            elseif mark == "nino" 
             then
-                love.graphics.print("O", (col - 1) * cellSize + cellSize / 2 - 10, (row - 1) * cellSize + cellSize / 2 - 10)
+                love.graphics.draw(imageY, (col - 1) * cellSize + 10, (row - 1) * cellSize + 10, 0, cellSize / imageY:getWidth(), cellSize / imageY:getHeight())
             end
         end
     end
 
     if winner 
     then
-        love.graphics.print(winner .. " ha ganado!", windowWidth / 2 - 50, windowHeight - 50)
+        love.graphics.print(winner .. " ha ganado!", windowWidth / 2 - 50, windowHeight - 25)
     end
 end
 
