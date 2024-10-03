@@ -19,6 +19,14 @@ function love.load()
     end
 end
 
+function resetGame()
+    for i = 1, 3 do
+        grid[i] = {"", "", ""}
+    end
+    currentPlayer = "miku"
+    winner = nil
+end
+
 function love.mousepressed(x, y, button)
     if button == 1 
     then
@@ -31,6 +39,12 @@ function love.mousepressed(x, y, button)
             currentPlayer = (currentPlayer == "miku") and "nino" or "miku"
             checkWinner()
         end
+    end
+end
+
+function love.keypressed(key)
+    if key == "r" then
+        resetGame()  -- Reinicia el juego si se presiona 'R'
     end
 end
 
