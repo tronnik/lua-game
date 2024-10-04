@@ -9,6 +9,10 @@ in the repository you will download the folder with the .main and the images of 
 
 ## Game 
 in the itch.io page you will download the zip with the .exe and the .dll for the correct function of the game
+
+### Controls
+The basic controls are a left-click to choose where to place your move and pressing R will restart the game.
+
 link of the [itch.io](https://valentin-villar.itch.io/tic-tac-nakano)
 
 ![Image](https://img.itch.zone/aW1nLzE4MDMxODc4LnBuZw==/original/3PvQeQ.png)
